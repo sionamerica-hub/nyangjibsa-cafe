@@ -13,6 +13,9 @@ SaveManager="*res://autoload/SaveManager.gd"
 AudioManager="*res://autoload/AudioManager.gd"
 ShopManager="*res://autoload/ShopManager.gd"
 AdManager="*res://autoload/AdManager.gd"
+BalanceMeter="*res://autoload/BalanceMeter.gd"
+TimePeriodManager="*res://autoload/TimePeriodManager.gd"
+OfflineReward="*res://autoload/OfflineReward.gd"
 
 [rendering]
 renderer/rendering_method="gl_compatibility"
