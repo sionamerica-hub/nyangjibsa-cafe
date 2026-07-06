@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "coco"
+display_name = "코코"
+breed = "먼치킨"
+personality = "호기심이"
+sprite_path = ""
+base_hunger = 40
+base_activity = 80
+base_rest = 30
+rarity = "N"
+unlock_coin = 100
+flavor_text = "다리가 짧지만 호기심은 길어요"

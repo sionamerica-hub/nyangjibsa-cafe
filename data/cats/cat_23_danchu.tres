@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "danchu"
+display_name = "단추"
+breed = "아비시니안"
+personality = "호기심이"
+sprite_path = ""
+base_hunger = 40
+base_activity = 80
+base_rest = 30
+rarity = "N"
+unlock_coin = 100
+flavor_text = "단추 같은 눈, 호기심 대장"

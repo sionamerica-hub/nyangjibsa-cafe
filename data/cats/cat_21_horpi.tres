@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "horpi"
+display_name = "호피"
+breed = "메인쿤"
+personality = "수줍음이"
+sprite_path = ""
+base_hunger = 30
+base_activity = 20
+base_rest = 80
+rarity = "SR"
+unlock_coin = 2000
+flavor_text = "대형 수줍이, 무게감 있는 포옹"

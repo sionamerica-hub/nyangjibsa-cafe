@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "lile"
+display_name = "라일"
+breed = "발리니즈"
+personality = "호기심이"
+sprite_path = ""
+base_hunger = 40
+base_activity = 80
+base_rest = 30
+rarity = "R"
+unlock_coin = 500
+flavor_text = "이국적인 무늬, 민첩한 발리니즈"

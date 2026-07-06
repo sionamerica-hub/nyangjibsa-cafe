@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "ocean"
+display_name = "오션"
+breed = "시베리안"
+personality = "게으름이"
+sprite_path = ""
+base_hunger = 60
+base_activity = 30
+base_rest = 80
+rarity = "SR"
+unlock_coin = 2000
+flavor_text = "눈보라 속 거인, 느긋한 수호자"

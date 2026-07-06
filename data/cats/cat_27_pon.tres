@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "pon"
+display_name = "폰"
+breed = "코리시"
+personality = "폭식가"
+sprite_path = ""
+base_hunger = 80
+base_activity = 70
+base_rest = 30
+rarity = "N"
+unlock_coin = 100
+flavor_text = "꼬리가 짧은 폭식가"

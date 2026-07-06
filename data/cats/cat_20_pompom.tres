@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "pompom"
+display_name = "폼폼"
+breed = "노르웨이숲"
+personality = "호기심이"
+sprite_path = ""
+base_hunger = 40
+base_activity = 80
+base_rest = 30
+rarity = "R"
+unlock_coin = 500
+flavor_text = "숲의 왕자님, 풍성한 목도리"

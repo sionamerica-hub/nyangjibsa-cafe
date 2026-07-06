@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "simple"
+display_name = "심플"
+breed = "벵갈"
+personality = "폭식가"
+sprite_path = ""
+base_hunger = 80
+base_activity = 70
+base_rest = 30
+rarity = "R"
+unlock_coin = 500
+flavor_text = "표범 무늬, 사냥 본능 폭발"

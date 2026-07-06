@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "sunny"
+display_name = "써니"
+breed = "러시안블루"
+personality = "폭식가"
+sprite_path = ""
+base_hunger = 80
+base_activity = 70
+base_rest = 30
+rarity = "N"
+unlock_coin = 100
+flavor_text = "은빛 단발머리, 늘 점심 생각"
