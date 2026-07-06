@@ -1,0 +1,23 @@
+; Engine configuration file.
+config_version=5
+
+[application]
+config/name="Nyangjibsa Cafe"
+config/description="모바일 캣 카페 방치형 타이쿤 — 한국 시나리오"
+run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[autoload]
+SignalBus="*res://autoload/SignalBus.gd"
+SaveManager="*res://autoload/SaveManager.gd"
+AudioManager="*res://autoload/AudioManager.gd"
+ShopManager="*res://autoload/ShopManager.gd"
+AdManager="*res://autoload/AdManager.gd"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+
+[display]
+window/size/viewport_width=1080
+window/size/viewport_height=1920
