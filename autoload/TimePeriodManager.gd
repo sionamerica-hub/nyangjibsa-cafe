@@ -1,9 +1,10 @@
 extends Node
-class_name TimePeriodManager
 ## 냥집사 카페 — 시간대 7구간 (KST 매핑)
-## 기획서 §13.3 — TimePeriodManager
+## 기획서 §13.3 — TimePeriodManager (시간대 7구간 이벤트 — KST 매핑)
+##
+## NOTE: Autoload 키와 동일한 class_name은 충돌을 일으키므로 생략.
 
-const SIGNAL_PERIOD := 60.0
+const SIGNAL_PERIOD: float = 60.0   ## 매 분 체크
 
 const PERIODS := {
     "새벽":     {"coin_mult": 1.0, "customer_mult": 0.0, "jelly_bonus": 0, "is_peak": false, "is_closed": true},
@@ -31,15 +32,17 @@ func _ready() -> void:
     print("[TimePeriodManager] 시작 — 7구간, KST 매핑")
 
 static func get_kst_datetime_dict() -> Dictionary:
-    var utc := Time.get_datetime_dict_from_unix_time(int(Time.get_unix_time_from_system()))
-    var hour := (int(utc.hour) + 9) % 24
-    return {"hour": hour, "minute": int(utc.minute)}
+    var utc: Dictionary = Time.get_datetime_dict_from_unix_time(int(Time.get_unix_time_from_system()))
+    var utc_hour: int = int(utc.hour)
+    var utc_minute: int = int(utc.minute)
+    var hour: int = (utc_hour + 9) % 24
+    return {"hour": hour, "minute": utc_minute}
 
 static func kst_hour() -> int:
-    return get_kst_datetime_dict().hour
+    return int(get_kst_datetime_dict().hour)
 
 static func kst_minute() -> int:
-    return get_kst_datetime_dict().minute
+    return int(get_kst_datetime_dict().minute)
 
 func _resolve_period(hour: int) -> String:
     if hour >= 0 and hour < 6:  return "새벽"
@@ -55,8 +58,8 @@ func _on_tick() -> void:
     _recompute(false)
 
 func _recompute(force_emit: bool) -> void:
-    var h := kst_hour()
-    var prev := current_period
+    var h: int = kst_hour()
+    var prev: String = current_period
     current_period = _resolve_period(h)
     if force_emit or prev != current_period:
         print("[TimePeriodManager] KST=%02d → %s" % [h, current_period])
@@ -65,38 +68,48 @@ func _recompute(force_emit: bool) -> void:
         _maybe_peak_warning()
 
 func _maybe_peak_warning() -> void:
-    var d := get_kst_datetime_dict()
-    var m := d.hour * 60 + d.minute
-    var targets := [
+    var d: Dictionary = get_kst_datetime_dict()
+    var hour: int = int(d.hour)
+    var minute: int = int(d.minute)
+    var m: int = hour * 60 + minute
+    var targets: Array = [
         {"name": "점심피크", "fire_at": 11 * 60 + 30},
         {"name": "저녁피크", "fire_at": 16 * 60 + 30},
     ]
     for t in targets:
-        var key := "%02d:%02d-%s" % [d.hour, d.minute, t.name]
-        var fired := _peak_warned_today.get(key, false)
-        if not fired and m >= t.fire_at and m < t.fire_at + 2:
+        var t_dict: Dictionary = t
+        var t_name: String = String(t_dict.name)
+        var fire_at: int = int(t_dict.fire_at)
+        var key: String = "%02d:%02d-%s" % [hour, minute, t_name]
+        var fired: bool = bool(_peak_warned_today.get(key, false))
+        if not fired and m >= fire_at and m < fire_at + 2:
             _peak_warned_today[key] = true
-            print("[TimePeriodManager] ⚠ 피크 경고: %s 30분 전" % t.name)
+            print("[TimePeriodManager] ⚠ 피크 경고: %s 30분 전" % t_name)
             if signal_bus != null and signal_bus.has_signal("peak_warning"):
-                signal_bus.emit_signal("peak_warning", t.name)
+                signal_bus.emit_signal("peak_warning", t_name)
 
 func get_current_period() -> String:
     return current_period
 
 func get_multiplier() -> float:
-    return float(PERIODS[current_period].coin_mult)
+    var info: Dictionary = PERIODS[current_period]
+    return float(info.coin_mult)
 
 func get_customer_bonus() -> float:
-    return float(PERIODS[current_period].customer_mult)
+    var info: Dictionary = PERIODS[current_period]
+    return float(info.customer_mult)
 
 func get_jelly_bonus() -> int:
-    return int(PERIODS[current_period].jelly_bonus)
+    var info: Dictionary = PERIODS[current_period]
+    return int(info.jelly_bonus)
 
 func is_closed() -> bool:
-    return bool(PERIODS[current_period].is_closed)
+    var info: Dictionary = PERIODS[current_period]
+    return bool(info.is_closed)
 
 func is_peak() -> bool:
-    return bool(PERIODS[current_period].is_peak)
+    var info: Dictionary = PERIODS[current_period]
+    return bool(info.is_peak)
 
 func get_period_info() -> Dictionary:
     return {
@@ -110,16 +123,16 @@ func get_period_info() -> Dictionary:
         "is_peak": is_peak(),
     }
 
-func get_ovemight_bonus() -> float:
+func get_overnight_bonus() -> float:
     return 1.30
 
-func _try_get_singleton(name: String) -> Node:
-    var root := Engine.get_main_loop()
+func _try_get_singleton(singleton_name: String) -> Node:
+    var root: Object = Engine.get_main_loop()
     if root == null:
         return null
-    var tree := root as SceneTree
+    var tree: SceneTree = root as SceneTree
     if tree == null:
         return null
-    if tree.root != null and tree.root.has_node(name):
-        return tree.root.get_node(name)
+    if tree.root != null and tree.root.has_node(singleton_name):
+        return tree.root.get_node(singleton_name)
     return null
