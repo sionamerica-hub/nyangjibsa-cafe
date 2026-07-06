@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "blacky"
+display_name = "까만이"
+breed = "코리안숏헤어"
+personality = "호기심이"
+sprite_path = ""
+base_hunger = 40
+base_activity = 80
+base_rest = 30
+rarity = "N"
+unlock_coin = 100
+flavor_text = "까만 밤톨, 어둠 속 호기심"

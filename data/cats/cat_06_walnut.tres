@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CatData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CatData.gd" id="1_catdata"]
+
+[resource]
+script = ExtResource("1_catdata")
+id = "walnut"
+display_name = "호두"
+breed = "코리안숏헤어"
+personality = "게으름이"
+sprite_path = ""
+base_hunger = 60
+base_activity = 30
+base_rest = 80
+rarity = "N"
+unlock_coin = 100
+flavor_text = "호두처럼 동글동글, 늘 졸림"
