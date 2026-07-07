@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CustomerData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "yoon_seora"
+display_name = "윤서라"
+avatar_emoji = "👩‍💼"
+personality = "게으름이"
+is_regular = true
+preferred_drink = "바닐라라떼"
+acceptable_drinks = ["바닐라라떼", "라떼", "카푸치노", "딸기스무디"]
+rejected_drinks = []
+patience_sec = 60.0
+tip_jelly_min = 2
+tip_jelly_max = 5
+base_coin_reward = 90
+flavor_text = "VIP 단골 — 길게 머물면서 책 읽음"

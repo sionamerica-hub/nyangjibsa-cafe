@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CustomerData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "choi_sumin"
+display_name = "최수민"
+avatar_emoji = "👧"
+personality = "친절함"
+is_regular = false
+preferred_drink = "바닐라라떼"
+acceptable_drinks = ["바닐라라떼", "라떼", "카푸치노"]
+rejected_drinks = []
+patience_sec = 32.0
+tip_jelly_min = 1
+tip_jelly_max = 4
+base_coin_reward = 70
+flavor_text = "달달한 거 좋아하는 학생"

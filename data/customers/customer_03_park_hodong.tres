@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CustomerData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "park_hodong"
+display_name = "박호동"
+avatar_emoji = "🧔"
+personality = "다급함"
+is_regular = false
+preferred_drink = "밀크티"
+acceptable_drinks = ["밀크티", "딸기스무디"]
+rejected_drinks = ["아메리카노"]
+patience_sec = 16.0
+tip_jelly_min = 0
+tip_jelly_max = 1
+base_coin_reward = 40
+flavor_text = "3분 안에 안 나오면 짜증"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CustomerData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "shin_doyoon"
+display_name = "신도윤"
+avatar_emoji = "🧑‍🎓"
+personality = "다급함"
+is_regular = false
+preferred_drink = "아메리카노"
+acceptable_drinks = ["아메리카노", "라떼"]
+rejected_drinks = []
+patience_sec = 14.0
+tip_jelly_min = 0
+tip_jelly_max = 1
+base_coin_reward = 45
+flavor_text = "시험기간 카페인의 신"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CustomerData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "kim_youngsoo"
+display_name = "김영수"
+avatar_emoji = "🧑‍💼"
+personality = "까다로움"
+is_regular = true
+preferred_drink = "아메리카노"
+acceptable_drinks = ["아메리카노"]
+rejected_drinks = ["밀크티", "딸기스무디"]
+patience_sec = 22.0
+tip_jelly_min = 0
+tip_jelly_max = 3
+base_coin_reward = 60
+flavor_text = "아메리카노만 마시는 진상 단골"

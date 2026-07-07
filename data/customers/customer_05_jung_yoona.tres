@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CustomerData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "jung_yoona"
+display_name = "정유나"
+avatar_emoji = "👩‍🦰"
+personality = "게으름이"
+is_regular = true
+preferred_drink = "카푸치노"
+acceptable_drinks = ["카푸치노", "라떼"]
+rejected_drinks = []
+patience_sec = 50.0
+tip_jelly_min = 1
+tip_jelly_max = 3
+base_coin_reward = 50
+flavor_text = "천천히 음료 마시는 여유파"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CustomerData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "kang_jihun"
+display_name = "강지훈"
+avatar_emoji = "🧑"
+personality = "까다로움"
+is_regular = false
+preferred_drink = "딸기스무디"
+acceptable_drinks = ["딸기스무디", "밀크티"]
+rejected_drinks = ["아메리카노"]
+patience_sec = 24.0
+tip_jelly_min = 0
+tip_jelly_max = 2
+base_coin_reward = 55
+flavor_text = "달달한 음료만 마심"

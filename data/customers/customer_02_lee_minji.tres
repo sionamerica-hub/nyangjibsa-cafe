@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/CustomerData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "lee_minji"
+display_name = "이민지"
+avatar_emoji = "👩"
+personality = "친절함"
+is_regular = true
+preferred_drink = "라떼"
+acceptable_drinks = ["라떼", "바닐라라떼", "카푸치노"]
+rejected_drinks = []
+patience_sec = 38.0
+tip_jelly_min = 2
+tip_jelly_max = 6
+base_coin_reward = 80
+flavor_text = "라떼 애호가 단골 손님"
