@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/MainScene.gd" id="1_main"]
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Slots" type="Node2D" parent="."]
+
+[node name="CatSprite" type="Label" parent="."]
+offset_left = 440.0
+offset_top = 800.0
+offset_right = 640.0
+offset_bottom = 1000.0
+text = "🐱"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TopBar" type="Panel" parent="HUD"]
+offset_right = 1080.0
+offset_bottom = 220.0
+
+[node name="FacilityLabel" type="Label" parent="HUD/TopBar"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1060.0
+offset_bottom = 70.0
+text = "🏠 Lv 1 골목 캣 카페"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoinLabel" type="Label" parent="HUD/TopBar"]
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 540.0
+offset_bottom = 140.0
+text = "💰 코인: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JellyLabel" type="Label" parent="HUD/TopBar"]
+offset_left = 540.0
+offset_top = 80.0
+offset_right = 1060.0
+offset_bottom = 140.0
+text = "💎 젤리: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PeriodLabel" type="Label" parent="HUD/TopBar"]
+offset_left = 20.0
+offset_top = 150.0
+offset_right = 1060.0
+offset_bottom = 210.0
+text = "⏰ 시간대"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CustomerAlert" type="Label" parent="HUD"]
+offset_left = 200.0
+offset_top = 250.0
+offset_right = 880.0
+offset_bottom = 330.0
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+visible = false
+modulate = Color(1, 1, 1, 1)
+
+[node name="TabBar" type="Panel" parent="HUD"]
+offset_top = 1780.0
+offset_right = 1080.0
+offset_bottom = 1920.0
+
+[node name="CafeBtn" type="Button" parent="HUD/TabBar"]
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 226.0
+offset_bottom = 130.0
+text = "🏠카페"
+
+[node name="CatsBtn" type="Button" parent="HUD/TabBar"]
+offset_left = 232.0
+offset_top = 10.0
+offset_right = 438.0
+offset_bottom = 130.0
+text = "🐱캣"
+
+[node name="ShopBtn" type="Button" parent="HUD/TabBar"]
+offset_left = 444.0
+offset_top = 10.0
+offset_right = 650.0
+offset_bottom = 130.0
+text = "🛒상점"
+
+[node name="AlbumBtn" type="Button" parent="HUD/TabBar"]
+offset_left = 656.0
+offset_top = 10.0
+offset_right = 862.0
+offset_bottom = 130.0
+text = "📖도감"
+
+[node name="SettingsBtn" type="Button" parent="HUD/TabBar"]
+offset_left = 868.0
+offset_top = 10.0
+offset_right = 1074.0
+offset_bottom = 130.0
+text = "⚙️설정"
