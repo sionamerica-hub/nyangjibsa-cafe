@@ -1,12 +1,29 @@
-# Godot
-.import/
+# Godot 4+ specific ignores
 .godot/
+.import/
+
+# Godot autoload UID cache
+*.uid
+*.uid-gki2Yj
+
+# Godot-specific ignores
+android/plugins/
 android/build/
 android/.gradle/
+android/local.properties
 android/app/build/
-*.apk
-*.aab
-*.keystore
-*.keystore.*
-export/
-build/
+android/app/release/
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+
+# System/tool-specific ignores
+.directory
+*~
+
+# .gitignore
+*.gd.uid
