@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/FacilityData.gd" id="1_facdata"]
+
+[resource]
+script = ExtResource("1_facdata")
+id = "facility_lv1"
+display_name = "골목 캣 카페"
+level = 1
+description = "작지만 따뜻한 골목의 캣 카페. 처음 시작하는 냥집사에게 적합."
+required_coin = 0
+coin_per_min = 100
+slot_count = 3
+max_cats = 3
+theme_color = "#FFB5C8"
+upgrade_hours_note = "기본 시설 (업그레이드 불필요)"
+upgrade_hours = 0

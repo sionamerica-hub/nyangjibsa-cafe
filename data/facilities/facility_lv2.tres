@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/FacilityData.gd" id="1_facdata"]
+
+[resource]
+script = ExtResource("1_facdata")
+id = "facility_lv2"
+display_name = "동네 캣 카페"
+level = 2
+description = "동네 주민들이 애용하는 캣 카페. 손님이 조금 늘었다."
+required_coin = 2000
+coin_per_min = 250
+slot_count = 4
+max_cats = 5
+theme_color = "#FFD89C"
+upgrade_hours_note = "업그레이드 2시간 (코인 2,000 필요)"
+upgrade_hours = 2
