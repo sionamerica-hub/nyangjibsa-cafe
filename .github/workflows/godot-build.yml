@@ -1,0 +1,159 @@
+name: Godot Android Build
+
+# 냥집사 카페 (Nyangjibsa Cafe) — Godot 4.7 Android CI
+# 트리거: main push, PR
+# 산출물: debug-apk (PR 빌드 검증), release-aab (main 릴리즈)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: "4.7-stable"
+  ANDROID_API: "35"
+  BUILD_TOOLS: "35.0.0"
+
+jobs:
+  build-android:
+    name: Build Android (APK + AAB)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: apt
+
+      - name: 📦 Cache Godot
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: ~/godot
+          key: godot-${{ env.GODOT_VERSION }}
+
+      - name: 🎮 Download Godot Engine 4.7
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/godot
+          cd ~/godot
+          wget -q \
+            "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-linux/Godot_v4.7-stable_linux.x86_64.zip"
+          unzip -q Godot_v4.7-stable_linux.x86_64.zip
+          mv Godot_v4.7-stable_linux.x86_64 godot
+          chmod +x godot
+          rm Godot_v4.7-stable_linux.x86_64.zip
+          ./godot --version
+
+      - name: 📂 Install Godot to PATH
+        run: echo "$HOME/godot" >> $GITHUB_PATH
+
+      - name: 📦 Cache Export Templates
+        id: cache-templates
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/godot/export_templates
+          key: templates-${{ env.GODOT_VERSION }}
+
+      - name: 🎨 Download Export Templates 4.7
+        if: steps.cache-templates.outputs.cache-hit != 'true'
+        run: |
+          wget -q \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v4.7-stable_export_templates.tpz"
+          mkdir -p ~/.local/share/godot/export_templates/4.7.stable
+          unzip -q -o Godot_v4.7-stable_export_templates.tpz \
+            -d ~/.local/share/godot/export_templates/4.7.stable
+          mv ~/.local/share/godot/export_templates/4.7.stable/templates/* \
+             ~/.local/share/godot/export_templates/4.7.stable/ 2>/dev/null || true
+          rm Godot_v4.7-stable_export_templates.tpz
+
+      - name: 📦 Install Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: 📦 Install Android NDK r26d
+        uses: android-actions/setup-android@v3
+        with:
+          ndk-version: r26d
+
+      - name: 🔑 Generate Debug Keystore
+        run: |
+          mkdir -p ~/keystores
+          keytool -genkey -v \
+            -keystore ~/keystores/debug.keystore \
+            -storepass android -alias androiddebugkey \
+            -keypass android \
+            -dname "CN=Android Debug,O=Android,C=US" \
+            -keyalg RSA -keysize 2048 -validity 10000
+
+      - name: 🔑 Generate Release Keystore
+        env:
+          KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD || 'nyangjibsa2026' }}
+          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD || 'nyangjibsa2026' }}
+        run: |
+          mkdir -p ~/keystores
+          keytool -genkey -v \
+            -keystore ~/keystores/release.keystore \
+            -storepass "$KEYSTORE_PASS" \
+            -alias nyangjibsa \
+            -keypass "$KEY_PASS" \
+            -dname "CN=Nyangjibsa Cafe,O=Sionamerica,C=KR" \
+            -keyalg RSA -keysize 2048 -validity 10000
+          ls -la ~/keystores/
+
+      - name: 📝 Copy Debug Export Preset
+        run: cp .github/export_presets_debug.cfg export_presets.cfg
+
+      - name: 🏗️ Import Godot Project (validate scripts)
+        run: |
+          godot --headless --import 2>&1 | tail -20 || true
+
+      - name: 🏗️ Build Debug APK
+        run: |
+          mkdir -p build
+          godot --headless --export-debug "Android" build/nyangjibsa-debug.apk 2>&1 | tail -30
+          ls -la build/ || true
+
+      - name: 📝 Copy Release Export Preset (AAB)
+        run: cp .github/export_presets_aab.cfg export_presets.cfg
+
+      - name: 🏗️ Build Release AAB
+        run: |
+          godot --headless --export-release "Android" build/nyangjibsa-release.aab 2>&1 | tail -30
+          ls -la build/ || true
+
+      - name: 📤 Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: nyangjibsa-debug-apk
+          path: build/nyangjibsa-debug.apk
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: 📤 Upload Release AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: nyangjibsa-release-aab
+          path: build/nyangjibsa-release.aab
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: ✅ Build Summary
+        if: always()
+        run: |
+          {
+            echo "### 🎮 Godot Android Build"
+            echo "- Branch: \`${{ github.ref }}\`"
+            echo "- Commit: \`${{ github.sha }}\`"
+            echo "- Godot: \`${{ env.GODOT_VERSION }}\`"
+            echo ""
+            echo "**Artifacts:**"
+            ls -la build/ 2>/dev/null || echo "(no artifacts)"
+          } >> $GITHUB_STEP_SUMMARY
