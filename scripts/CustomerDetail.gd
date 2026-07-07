@@ -1,14 +1,10 @@
 extends Control
-## 냥집사 카페 — 손님 상세 화면
+## 냥집사 카페 — 손님 상세 화면 (v2 — sprite 통합)
 ## 손님 클릭 시 호출되어 1명 상세 정보(이름/페르소나/주문/인내심/좋아캣) 표시
+## + 음식 sprite (sweets_pack.png)
 ##
 ## 시그널:
 ##   close_requested() — 상세 화면 닫기 요청
-##
-## 사용:
-##   var dlg = preload("res://scenes/CustomerDetail.tscn").instantiate()
-##   dlg.show_customer(customer_data)
-##   add_child(dlg)
 
 signal close_requested()
 
@@ -24,19 +20,20 @@ var _flavor_label: Label = null
 var _acceptable_container: VBoxContainer = null
 var _rejected_container: VBoxContainer = null
 var _regular_label: Label = null
+var _food_sprite: TextureRect = null
+
+const FOOD_SPRITE_PATH := "res://assets/foods/sweets_pack.png"
 
 func _ready() -> void:
 	_build_ui()
 	_hide()
 
 func _build_ui() -> void:
-	# 배경 패널 (어두운 반투명)
 	var bg: ColorRect = ColorRect.new()
 	bg.color = Color(0, 0, 0, 0.7)
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 
-	# 메인 카드
 	var card: PanelContainer = PanelContainer.new()
 	card.set_anchors_preset(Control.PRESET_CENTER)
 	card.custom_minimum_size = Vector2(420, 540)
@@ -48,7 +45,6 @@ func _build_ui() -> void:
 	vb.add_theme_constant_override("separation", 8)
 	card.add_child(vb)
 
-	# 헤더 (X 닫기)
 	var hb: HBoxContainer = HBoxContainer.new()
 	vb.add_child(hb)
 	var spacer: Control = Control.new()
@@ -60,89 +56,83 @@ func _build_ui() -> void:
 	_close_button.pressed.connect(_on_close_pressed)
 	hb.add_child(_close_button)
 
-	# 아바타
 	_avatar_label = Label.new()
 	_avatar_label.text = "😊"
 	_avatar_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_avatar_label.add_theme_font_size_override("font_size", 56)
 	vb.add_child(_avatar_label)
 
-	# 이름
 	_name_label = Label.new()
 	_name_label.text = "이름"
 	_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_name_label.add_theme_font_size_override("font_size", 28)
 	vb.add_child(_name_label)
 
-	# 단골 배지
 	_regular_label = Label.new()
 	_regular_label.text = ""
 	_regular_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_regular_label.add_theme_font_size_override("font_size", 16)
 	vb.add_child(_regular_label)
 
-	# 페르소나
 	_personality_label = Label.new()
 	_personality_label.text = "페르소나: -"
 	_personality_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(_personality_label)
 
-	# 구분선
 	var sep1: HSeparator = HSeparator.new()
 	vb.add_child(sep1)
 
-	# 주문
 	_drink_label = Label.new()
 	_drink_label.text = "☕ 선호 음료: -"
 	vb.add_child(_drink_label)
 
-	# 인내심
 	_patience_label = Label.new()
 	_patience_label.text = "⏰ 인내심: -"
 	vb.add_child(_patience_label)
 
-	# 코인 보상
 	_coin_label = Label.new()
 	_coin_label.text = "💰 기본 보상: -"
 	vb.add_child(_coin_label)
 
-	# 구분선
 	var sep2: HSeparator = HSeparator.new()
 	vb.add_child(sep2)
 
-	# 허용 음료
 	var acceptable_title: Label = Label.new()
 	acceptable_title.text = "✅ 좋아하는 음료"
 	vb.add_child(acceptable_title)
 	_acceptable_container = VBoxContainer.new()
 	vb.add_child(_acceptable_container)
 
-	# 거부 음료
 	var rejected_title: Label = Label.new()
 	rejected_title.text = "❌ 거부 음료"
 	vb.add_child(rejected_title)
 	_rejected_container = VBoxContainer.new()
 	vb.add_child(_rejected_container)
 
-	# 구분선
 	var sep3: HSeparator = HSeparator.new()
 	vb.add_child(sep3)
 
-	# flavor
 	_flavor_label = Label.new()
 	_flavor_label.text = ""
 	_flavor_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_flavor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(_flavor_label)
 
-## 손님 정보 표시
+	# 음식 sprite (sweets_pack.png)
+	_food_sprite = TextureRect.new()
+	_food_sprite.name = "FoodSprite"
+	_food_sprite.custom_minimum_size = Vector2(128, 128)
+	_food_sprite.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	_food_sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_food_sprite.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	vb.add_child(_food_sprite)
+
 func show_customer(cd: Resource) -> void:
 	if cd == null:
 		_hide()
 		return
 	current_customer = cd
 
-	# CustomerData Resource 의 필드 사용
 	_avatar_label.text = String(cd.avatar_emoji)
 	_name_label.text = String(cd.display_name)
 	_personality_label.text = "🎭 " + String(cd.personality)
@@ -162,10 +152,17 @@ func show_customer(cd: Resource) -> void:
 	_populate_drink_list(_acceptable_container, cd.acceptable_drinks, "✅")
 	_populate_drink_list(_rejected_container, cd.rejected_drinks, "❌")
 
+	# 음식 sprite 로드
+	var tex: Texture2D = load(FOOD_SPRITE_PATH)
+	if tex != null:
+		_food_sprite.texture = tex
+		_food_sprite.visible = true
+	else:
+		_food_sprite.visible = false
+
 	show()
 
 func _populate_drink_list(container: VBoxContainer, drinks: Array, prefix: String) -> void:
-	# 기존 비우기
 	for child in container.get_children():
 		child.queue_free()
 	if drinks == null or drinks.is_empty():

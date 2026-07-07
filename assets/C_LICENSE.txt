@@ -1,0 +1,40 @@
+# 냥집사 카페 — 자산 라이선스 (C 단계: 음식/소품)
+
+## 상업 사용 가능 확인된 자산 (2026-07-07)
+
+### OpenGameArt.org
+
+| 파일 | 원본 | 라이선스 | 저작자 | 의무 |
+|---|---|---|---|---|
+| `assets/foods/cozy_cafe_icons.png` | https://opengameart.org/content/cozy-caf%C3%A9-icons | **CC-BY 4.0** | Pixelandbeans | 저작자 표시 |
+| `assets/foods/sweets_pack.png` | https://opengameart.org/content/sweets | **CC0 1.0** | (Public Domain) | 없음 |
+| `assets/foods/smiling_cookie.png` | https://opengameart.org/content/smiling-cookie | **CC0 1.0** | (Public Domain) | 없음 |
+| `assets/props/pixel_furniture_kapak.png` | https://opengameart.org/content/pixel-furniture | **CC-BY 4.0** | (저작자 페이지 확인 필요) | 저작자 표시 |
+| `assets/props/pixel_furniture_main.png` | https://opengameart.org/content/pixel-furniture | **CC-BY 4.0** | (저작자 페이지 확인 필요) | 저작자 표시 |
+
+## 회피한 자산 (라이선스 부적합)
+
+| pack | 라이선스 | 회피 이유 |
+|---|---|---|
+| Beverage Collection | GPL 3.0 + CC-BY-SA 4.0 | copyleft + share-alike → 비공개 fork 불가 |
+| Cute Cakes | GPL 3.0 | copyleft |
+| Drink Icon Pack | CC-BY | 사용 가능하나 톤 부적합 (어두운 색상) |
+| Restaurant Food | CC-BY | 사용 가능하나 고해상도 비현실적 (1024×1024) |
+
+## 우리 게임 표시 의무
+
+게임 내 About / Credits 화면에 다음 표기:
+```
+음식/소품 sprite — OpenGameArt.org
+- Cozy Café Icons (CC-BY 4.0) © Pixelandbeans
+- Sweets (CC0 1.0)
+- Smiling Cookie (CC0 1.0)
+- Pixel Furniture (CC-BY 4.0)
+```
+
+## 라이선스 안전 점검
+
+- ✅ 상업 사용 가능 (CC0, CC-BY 4.0)
+- ✅ 비공개 fork 가능 (no copyleft, no share-alike)
+- ✅ 톤 일관성 (코지/큐트/픽셀아트)
+- ⚠️ Pixel Furniture 저작자 정확한 이름 미확인 — 출시 전 About 페이지에 "OpenGameArt contributors" 표기 권장
