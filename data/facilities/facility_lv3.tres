@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/FacilityData.gd" id="1_facdata"]
+
+[resource]
+script = ExtResource("1_facdata")
+id = "facility_lv3"
+display_name = "한 블록 캣 카페"
+level = 3
+description = "한 블록 주민이 다 알 정도. 손님 안정권."
+required_coin = 8000
+coin_per_min = 600
+slot_count = 5
+max_cats = 8
+theme_color = "#A8E6CF"
+upgrade_hours_note = "업그레이드 6시간 (코인 8,000 필요)"
+upgrade_hours = 6

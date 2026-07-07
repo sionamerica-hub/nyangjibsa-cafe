@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/FacilityData.gd" id="1_facdata"]
+
+[resource]
+script = ExtResource("1_facdata")
+id = "facility_lv4"
+display_name = "시청 캣 카페"
+level = 4
+description = "시청 앞 명물 캣 카페. VIP 손님과 희귀 캣이 옵니다."
+required_coin = 30000
+coin_per_min = 1500
+slot_count = 6
+max_cats = 12
+theme_color = "#C8B6FF"
+upgrade_hours_note = "업그레이드 24시간 (코인 30,000 필요)"
+upgrade_hours = 24

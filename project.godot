@@ -16,6 +16,7 @@ AdManager="*res://autoload/AdManager.gd"
 BalanceMeter="*res://autoload/BalanceMeter.gd"
 TimePeriodManager="*res://autoload/TimePeriodManager.gd"
 OfflineReward="*res://autoload/OfflineReward.gd"
+FacilityManager="*res://autoload/FacilityManager.gd"
 
 [rendering]
 renderer/rendering_method="gl_compatibility"
