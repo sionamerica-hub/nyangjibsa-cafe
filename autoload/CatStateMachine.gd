@@ -1,0 +1,1 @@
+# 냥집사 카페 — gitignore (placeholder, 업데이트됨)
